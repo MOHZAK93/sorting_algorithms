@@ -9,7 +9,7 @@
  * @size: size of array
  */
 
-void quick_sort(int *array, int size)
+void quick_sort(int *array, size_t size)
 {
 	quicksort_recursion(array, 0, size - 1);
 }
