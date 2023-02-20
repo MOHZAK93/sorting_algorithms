@@ -24,7 +24,7 @@ void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
 void swap_node(listint_t *x, listint_t *y);
-int partition(int *array, int lb, int ub);
-void quicksort_recursion(int *array, int lb, int ub);
+int partition(int *array, int lb, int ub, size_t size);
+void quicksort_recursion(int *array, int lb, int ub, size_t size);
 void swap(int *x, int *y);
 #endif
