@@ -11,7 +11,7 @@
 
 void quick_sort(int *array, size_t size)
 {
-	quicksort_recursion(array, 0, size - 1);
+	quicksort_recursion(array, 0, size - 1, size);
 }
 
 /**
@@ -19,18 +19,19 @@ void quick_sort(int *array, size_t size)
  * portion of the quick_sort algorithm
  *
  * @array: array
- * @lb: low bound of array
+ * @lb: lower bound of array
  * @ub: upper bound of array
+ * @size: size of the array
  */
-void quicksort_recursion(int *array, int lb, int ub)
+void quicksort_recursion(int *array, int lb, int ub, size_t size)
 {
 	int pivot_index;
 
 	if (lb < ub)
 	{
-		pivot_index = partition(array, lb, ub);
-		quicksort_recursion(array, lb, pivot_index - 1);
-		quicksort_recursion(array, pivot_index + 1, ub);
+		pivot_index = partition(array, lb, ub, size);
+		quicksort_recursion(array, lb, pivot_index - 1, size);
+		quicksort_recursion(array, pivot_index + 1, ub, size);
 	}
 }
 
@@ -54,25 +55,33 @@ void swap(int *x, int *y)
  * @array: array
  * @lb: lower bound of array
  * @ub: upper bound of array
+ * @size: size of the array
  *
  * Return: pivot element's index
  */
 
-int partition(int *array, int lb, int ub)
+int partition(int *array, int lb, int ub, size_t size)
 {
 	int pivot_value = array[ub];
-	int i = lb, j;
+	int i = lb - 1, j;
 
 	for (j = lb; j < ub; j++)
 	{
 		if (array[j] <= pivot_value)
 		{
-			swap(&array[i], &array[j]);
-			print_array(array, 10);
 			i++;
+			if (i != j)
+			{
+				swap(&array[i], &array[j]);
+				print_array(array, size);
+			}
 		}
 	}
-	swap(&array[i], &array[ub]);
-
+	i++;
+	if (i != ub)
+	{
+		swap(&array[i], &array[ub]);
+		print_array(array, size);
+	}
 	return (i);
 }
