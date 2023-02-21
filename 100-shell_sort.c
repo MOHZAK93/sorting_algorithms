@@ -11,19 +11,20 @@
 
 void shell_sort(int *array, size_t size)
 {
-	size_t gap, j;
+	int gap, i, j;
+	int len = size;
 
-	for (gap = size / 2; gap > 0; gap /= 2)
+	for (gap = (len / 3) + 1; gap > 0; gap /= 3)
 	{
-		for (j = gap; j < size; j++)
+		for (j = gap; j < len; j++)
 		{
-			while (j)
+			i = j;
+			while (array[i] < array[i - gap])
 			{
-				if (array[j] < array[j - gap])
-					swap(&array[j], &array[j - gap]);
-				else
+				swap(&array[i], &array[i - gap]);
+				i -= gap;
+				if (i - gap < 0)
 					break;
-				j--;
 			}
 		}
 		print_array(array, size);
