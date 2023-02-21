@@ -1,6 +1,4 @@
 #include "sort.h"
-#include <stdlib.h>
-#include <stdio.h>
 /**
  * shell_sort - sorts an array of integers in ascending
  * order using quick sort algorithm
@@ -11,10 +9,11 @@
 
 void shell_sort(int *array, size_t size)
 {
-	int gap, i, j;
-	int len = size;
+	int i, j, gap, n = 1, len = size;
 
-	for (gap = (len / 3) + 1; gap > 0; gap /= 3)
+	while (n < len)
+		n = n * 3 + 1;
+	for (gap = (n - 1) / 3; gap > 0; gap = (gap - 1) / 3)
 	{
 		for (j = gap; j < len; j++)
 		{
