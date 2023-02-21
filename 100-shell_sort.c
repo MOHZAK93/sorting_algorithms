@@ -9,7 +9,7 @@
 
 void shell_sort(int *array, size_t size)
 {
-	int i, j, gap, n = 1, len = size;
+	int i, j, gap, tmp, n = 1, len = size;
 
 	while (n < len)
 		n = n * 3 + 1;
@@ -20,7 +20,9 @@ void shell_sort(int *array, size_t size)
 			i = j;
 			while (array[i] < array[i - gap])
 			{
-				swap(&array[i], &array[i - gap]);
+				tmp = array[i];
+				array[i] = array[i - gap];
+				array[i - gap] = tmp;
 				i -= gap;
 				if (i - gap < 0)
 					break;
@@ -28,18 +30,4 @@ void shell_sort(int *array, size_t size)
 		}
 		print_array(array, size);
 	}
-}
-
-/**
- * swap - swap two elements of an array
- *
- * @x: first element
- * @y: second element
- */
-
-void swap(int *x, int *y)
-{
-	int tmp = *x;
-	*x = *y;
-	*y = tmp;
 }
